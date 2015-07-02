@@ -1,7 +1,7 @@
 defmodule ExampleApp.Presenters.EmailPresenter do
   def register_template(user) do
     """
-    <p><b>Hi #{user.username},</b></p>
+    <p><b>Hi #{user.email},</b></p>
     <p>Thanks for joining!</p>
     <p>Cheers!</p>
     <p></p>
@@ -11,7 +11,7 @@ defmodule ExampleApp.Presenters.EmailPresenter do
 
   def password_recovery_template(user) do
     """
-    <p><b>Hi #{user.username},</b></p>
+    <p><b>Hi #{user.email},</b></p>
     <p> It seems you've lost your password! </p>
     <p> Use this token <b>#{user.recovery_hash}"</b> to recover your password.</p>
     <p>

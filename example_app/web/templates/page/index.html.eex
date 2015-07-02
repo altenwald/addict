@@ -9,9 +9,6 @@
   <div class="col-lg-6">
     <h4>Register</h4>
     <div>
-      <input id="txt-register-username" type="text" placeholder="username">
-    </div>
-    <div>
       <input id="txt-register-email" type="text" placeholder="email">
     </div>
     <div>
@@ -85,13 +82,11 @@
   $(document).ready(function () {
     $('#btn-register').click(function() {
       var email = $('#txt-register-email').val();
-      var username = $('#txt-register-username').val();
       var password = $('#txt-register-password').val();
 
       $.post('/register', {
         email: email,
         password: password,
-        username: username
       })
       .then(function(data) {
         alert(data.message);

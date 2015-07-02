@@ -21,13 +21,13 @@ defmodule Addict.BaseManagerInteractor do
         Creates a user on the database and sends the welcoming e-mail via the defined
         `mailer`.
 
-        Required fields in `user_params` `Dict` are: `email`, `password`, `username`.
+        Required fields in `user_params` `Dict` are: `email`, `password`.
       """
       def create(user_params, repo \\ Addict.Repository, mailer \\ Addict.EmailGateway, password_interactor \\ Addict.PasswordInteractor) do
         validate_params(user_params)
         |> (fn (params) -> params["password"] end).()
         |> password_interactor.generate_hash
-        |> create_username(user_params, repo)
+        |> scrub_password(user_params, repo)
         |> send_welcome_email(mailer)
       end
 
@@ -106,14 +106,13 @@ defmodule Addict.BaseManagerInteractor do
 
       defp validate_params(user_params) do
         case is_nil(user_params["email"])
-             or is_nil(user_params["password"])
-             or is_nil(user_params["username"]) do
+             or is_nil(user_params["password"]) do
                false -> user_params
-               true -> throw "Unable to create user, invalid hash. Required params: email, password, username"
+               true -> throw "Unable to create user, invalid hash. Required params: email, password."
              end
       end
 
-      defp create_username(hash, user_params, repo) do
+      defp scrub_password(hash, user_params, repo) do
         user_params = Map.delete(user_params, "password")
         |> Map.put("hash", hash)
         repo.create(user_params)

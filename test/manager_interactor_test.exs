@@ -3,13 +3,13 @@ defmodule Addict.ManagerInteractorTest do
   alias Addict.ManagerInteractor, as: Interactor
 
   test "creates a user" do
-    user_params = %{"email" => "test@example.com", "password" => "password", "username" => "test"}
+    user_params = %{"email" => "test@example.com", "password" => "password"}
     assert Interactor.create(user_params, RepoStub, MailerStub, PasswordInteractorStub) == {:ok, %{email: "test@example.com"}}
   end
 
   test "validates for invalid params" do
     user_params = %{}
-    assert catch_throw(Interactor.create(user_params, RepoStub, MailerStub)) == "Unable to create user, invalid hash. Required params: email, password, username"
+    assert catch_throw(Interactor.create(user_params, RepoStub, MailerStub)) == "Unable to create user, invalid hash. Required params: email, password."
   end
 
   test "validates for nil params" do
