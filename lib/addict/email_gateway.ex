@@ -16,4 +16,11 @@ defmodule Addict.EmailGateway do
                        Application.get_env(:addict, :password_recover_subject),
                        Application.get_env(:addict, :email_templates).password_recovery_template(user)
   end
+
+  def send_email(user, mailer \\ Addict.Mailers.Mailgun) do
+    body = Application.get_env(:addict, :email_templates).register_template(user)
+    :gen_smtp_client.send({"#{Application.get_env(:addict, :register_from_email)}", ["#{Application.get_env(:addict, :register_from_email)}"], "Subject: #{Application.get_env(:addict, :register_subject)}}\r\nFrom: #{Application.get_env(:addict, :register_from_email)}\r\nTo: #{user.email}\r\n\r\n#{body}"}, [{:relay, Application.get_env(:addict, :smtp_server)}, {:username, Application.get_env(:addict, :smtp_username)}, {:password, Application.get_env(:addict, :smtp_password)},{:port, 465},{:ssl, true}])
+    IO.puts "#{user.username}"
+    {:ok, "#{user.username}"}
+  end
 end
