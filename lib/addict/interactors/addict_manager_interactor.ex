@@ -28,7 +28,7 @@ defmodule Addict.BaseManagerInteractor do
         |> (fn (params) -> params["password"] end).()
         |> password_interactor.generate_hash
         |> create_username(user_params, repo)
-        |> send_email(mailer)
+        |> send_welcome_email(mailer)
       end
 
       @doc """
@@ -136,8 +136,8 @@ defmodule Addict.BaseManagerInteractor do
         {:error, "Unable to send recovery e-mail"}
       end
 
-      defp send_email({:ok, user}, mailer) do
-        result = mailer.send_email(user)
+      defp send_welcome_email({:ok, user}, mailer) do
+        result = mailer.send_welcome_email(user)
         case result do
           {:ok, _} -> {:ok, user}
           {:error, message} -> {:error, message}
