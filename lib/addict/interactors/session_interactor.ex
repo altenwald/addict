@@ -3,8 +3,8 @@ defmodule Addict.SessionInteractor do
 
   def register({:ok, user}, conn) do
     conn = fetch_session(conn)
-    |> put_status(201)
     |> create_session(user)
+    |> put_status(201)
 
     {conn, %{message: "user created", user: sanitize_user(user)}}
   end
@@ -17,8 +17,8 @@ defmodule Addict.SessionInteractor do
 
   def login({:ok, user}, conn)  do
     conn = fetch_session(conn)
-    |> put_status(200)
     |> create_session(user)
+    |> put_status(200)
     {conn, %{message: "logged in", user: sanitize_user(user)}}
   end
 
