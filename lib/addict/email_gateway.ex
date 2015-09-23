@@ -13,7 +13,7 @@ defmodule Addict.EmailGateway do
   end
 
   def send_welcome_email_mailgun(user, mailer \\ Addict.Mailers.Mailgun) do
-    mailer.send_email_to_user "#{user.username} <#{user.email}>",
+    mailer.send_email_to_user "<#{user.email}>",
                        Application.get_env(:addict, :register_from_email),
                        Application.get_env(:addict, :register_subject),
                        Application.get_env(:addict, :email_templates).register_template(user)
@@ -43,7 +43,7 @@ defmodule Addict.EmailGateway do
     end
   end
   def send_password_recovery_email_mailgun(user, mailer \\ Addict.Mailers.Mailgun) do
-    mailer.send_email_to_user "#{user.username} <#{user.email}>",
+    mailer.send_email_to_user "<#{user.email}>",
                        Application.get_env(:addict, :password_recover_from_email),
                        Application.get_env(:addict, :password_recover_subject),
                        Application.get_env(:addict, :email_templates).password_recovery_template(user)

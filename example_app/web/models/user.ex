@@ -6,8 +6,6 @@ defmodule ExampleApp.User do
     field :email, :string
     field :hash, :string
     field :recovery_hash, :string
-    field :timestamps, :string
-
     timestamps
   end
 

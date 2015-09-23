@@ -14,7 +14,7 @@ defmodule Addict.BaseController do
       @doc """
         Entry point for registering new users.
 
-       `params` needs to include email, password and username.
+       `params` needs to include email and password.
         Returns a JSON response in the format `{message: text, user: %User{}}` with status `201` for
         successful creation, or `400` for when an error occurs.
         On success, it also logs the new user in.
