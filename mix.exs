@@ -29,6 +29,7 @@ defmodule Addict.Mixfile do
      {:ecto, "~> 1.0"},
      {:comeonin, "~> 1.1" },
      {:mailgun, "~> 0.0.2"},
+     {:gen_smtp, ">= 0.9.0"},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.7.1", only: :dev}]
   end

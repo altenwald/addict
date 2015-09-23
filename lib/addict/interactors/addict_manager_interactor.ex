@@ -143,7 +143,7 @@ defmodule Addict.BaseManagerInteractor do
         end
       end
 
-      defp send_welcome_email({:error, message}, _) do
+      defp send_email({:error, message}, _) do
         {:error, message}
       end
 
