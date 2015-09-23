@@ -19,8 +19,8 @@ defmodule Addict.Repository do
   def create(user_params) do
     try do
       user_params = for {key, val} <- user_params, into: %{}, do: {String.to_atom(key), val}
-      new_user = @db.insert!(struct(@user,user_params))
-      {:ok, new_user}
+      {:ok, new_user} = @db.insert!(struct(@user,user_params))
+      
     rescue
       e in Postgrex.Error -> PostgresErrorHandler.handle_error(__MODULE__, e)
     end
